@@ -1,0 +1,21 @@
+Установка OpenSSL (Windows)
+1) Скачать OpenSSL https://www.openssl.org/source/openssl-1.1.1f.tar.gz
+2) Если в системе не установлен Perl - скачать Strawberry Perl, установить
+3) Если в системе не установлен Nasm - скачать https://www.nasm.us/pub/nasm/releasebuilds/2.14.02/ . Запускать установщик от имени администратора. Далее добавить путь к nasm.exe в переменную окружения PATH
+
+4) Запустить командную строку Visual Studio от имени администратора (Visual Studio 20** Developer Command Promt, можно найти в пуске или в C:\Program Files (x86)\Microsoft Visual Studio\20**\{OUR VERSION}\Common7\Tools\)
+5) Версию Win64 собрать не получилось, поэтому рекомендую собирать Win32. Конфигурируем командой:
+perl Configure VC-WIN32
+Должна появиться надпись Openssl configured successful.
+6) Выполняем команду nmake
+Когда закончится, выполняем команду nmake test
+Если всё правильно, тесты пройдут (будут надписи ок)
+7) Выполняем команду nmake install
+OpenSSL будет установлена в C:\Program Files (x86)\OpenSSL
+
+Подключение в Visual Studio:
+1) Создать в VS проект (консольное приложение Win32)
+2) В настройках проекта в разделе C/C++ в Additional Include Directories указать папку C:\Program Files (x86)\OpenSSL\include
+3) В Linker прописать: Additional Library Directories -> C:\Program Files (x86)\OpenSSL\lib
+   в Additional Dependencies добавить libssl.lib;libcrypto.lib;
+4) При запуске возле .exe положить dll-файлы из папки C:\Program Files (x86)\OpenSSL\bin

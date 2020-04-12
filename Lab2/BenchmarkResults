@@ -1,0 +1,11 @@
+    Cipher|  Key size|Block size|Perfomance (MB/sec)
+      3DES|        64|        64|   3.39051
+    GOST15|       256|       128|   8.92112
+    AES128|       128|       128|   96.1353
+    AES256|       256|       128|    68.609
+
+
+
+OpenSSL 1.1.1 x64 version
+Microsoft Windows 7 Home Advanced
+Intel Core i7-4771 3.5 GHz

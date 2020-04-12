@@ -1,0 +1,35 @@
+Патчинг OpenSSL для возможности использовать шифрование ГОСТ под Win64.
+
+1) Скачиваем OpenSSL https://slproweb.com/products/Win32OpenSSL.html (Win64 OpenSSL v1.1.1f EXE), устанавливаем
+2) Убеждаемся, что установлен CMake, если нет - устанавливаем
+3) Выполняем команды:
+git clone https://github.com/ddulesov/engine.git
+cd engine
+cmake -DCMAKE_GENERATOR_PLATFORM=x64 -DOPENSSL_CRYPTO_LIBRARY=libcrypto64MT.lib  -DOPENSSL_ENGINES_DIR="C:\Program Files\OpenSSL-Win64\bin"  -B ./win_amd64 .
+
+4) Открываем Microsoft Visual Studio Developer Command Promt и в ней выполняем:
+cd ПУТЬ_ДО_ПАПКИ_engine/win_amd64
+msbuild gost-engine.sln /p:Configuration=Release /p:Platform=x64
+
+5) Кладём dll  \bin\Release\gost.dll в папку с OpenSSL-x64
+6) В папке C:\Program Files\OpenSSL-Win64\bin открывам файл openssl.cfg (нужны права администратора) и добавляем текст:
+openssl_conf = openssl_def
+[openssl_def]
+engines = engine_section
+
+[engine_section]
+gost = gost_section
+
+[gost_section]
+engine_id = gost
+dynamic_path = <provide path to gost.dll>
+default_algorithms = ALL
+CRYPT_PARAMS = id-Gost28147-89-CryptoPro-A-ParamSet
+
+7) В Visual Studio:
+С\С++->General->Additional Include Directories:
+ добавить C:\Program Files\OpenSSL-Win64\include и путь до папки engine
+Linker->General->Additional Library Directories:
+ добавить C:\Program Files\OpenSSL-Win64\lib и ПУТЬ_ДО_ПАПКИ_engine\win_amd64\Release;
+Linker->Input:
+ добавить libssl.lib;libcrypto.lib;gost.lib;gost_core.lib

@@ -3,7 +3,7 @@
 
 #include <openssl/evp.h>
 #include <openssl/rand.h>
-#include <gost_grasshopper_cipher.h>
+#include "gost_grasshopper_cipher.h"
 #include "CommonConstants.h"
 #include "CipherBenchmark.h"
 

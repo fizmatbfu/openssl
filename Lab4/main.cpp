@@ -103,7 +103,7 @@ void checkTag(const std::string &message, const std::string &key, const std::str
 }
 
 
-int main(int argc, char *argv[])
+int main()
 {
     const std::string key = generateRandomString(kBlockSize);
 

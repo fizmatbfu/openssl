@@ -1,0 +1,7 @@
+Elmir Kurakin Lab 4.
+
+Code requires: libstdc++, libcrypto, libssl
+
+For build and run lab, run following commands:
+make
+./lab4

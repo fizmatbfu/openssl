@@ -1,6 +1,6 @@
 Elmir Kurakin Lab 5.
 
-Code requires: libstdc++, libcrypto, libssl
+Code requires: libstdc++, libcrypto, libssl, std=c++11
 
 For build and run lab, run following commands:
 make
